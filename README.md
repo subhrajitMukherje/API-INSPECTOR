@@ -2,8 +2,6 @@
 
 A professional, modern API testing tool built with React, TypeScript, and Tailwind CSS. Test, debug, and document your APIs with ease using our intuitive interface and powerful features.
 
-![API Inspector](https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop)
-
 ## ✨ Features
 
 ### 🔥 Core Functionality
@@ -34,10 +32,9 @@ A professional, modern API testing tool built with React, TypeScript, and Tailwi
 ## 📱 Screenshots
 
 ### Desktop Interface
-![Desktop View](https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop)
+
 
 ### Mobile Responsive
-![Mobile View](https://images.pexels.com/photos/147413/twitter-facebook-together-exchange-of-information-147413.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop)
 
 ## 🛠️ Tech Stack
 
