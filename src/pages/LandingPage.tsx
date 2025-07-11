@@ -117,6 +117,9 @@ const LandingPage: React.FC = () => {
                       headerSubtitle: "hidden",
                       socialButtonsBlock: "hidden",
                       socialButtonsBlockButton: "hidden",
+                      dividerRow: "hidden",
+                      dividerText: "hidden",
+                      dividerLine: "hidden",
                       formButtonPrimary: "bg-blue-600 hover:bg-blue-700",
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
@@ -137,6 +140,9 @@ const LandingPage: React.FC = () => {
                       headerSubtitle: "hidden",
                       socialButtonsBlock: "hidden",
                       socialButtonsBlockButton: "hidden",
+                      dividerRow: "hidden",
+                      dividerText: "hidden",
+                      dividerLine: "hidden",
                       formButtonPrimary: "bg-blue-600 hover:bg-blue-700",
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
