@@ -8,7 +8,7 @@ import './index.css';
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Publishable Key")
+  throw new Error("Missing Publishable Key. Please check your .env file.")
 }
 
 const rootElement = document.getElementById('root');
@@ -16,7 +16,10 @@ if (!rootElement) throw new Error('Root element not found');
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider 
+      publishableKey={PUBLISHABLE_KEY}
+      navigate={(to) => window.location.href = to}
+    >
       <BrowserRouter>
         <App />
       </BrowserRouter>

@@ -110,6 +110,7 @@ const LandingPage: React.FC = () => {
               {showAuth === 'signin' ? (
                 <SignIn 
                   redirectUrl="/dashboard"
+                  afterSignInUrl="/dashboard"
                   appearance={{
                     elements: {
                       rootBox: "w-full",
@@ -127,12 +128,11 @@ const LandingPage: React.FC = () => {
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
                   }}
-                  routing="hash"
-                  signUpUrl="#"
                 />
               ) : (
                 <SignUp 
                   redirectUrl="/dashboard"
+                  afterSignUpUrl="/dashboard"
                   appearance={{
                     elements: {
                       rootBox: "w-full",
@@ -150,8 +150,6 @@ const LandingPage: React.FC = () => {
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
                   }}
-                  routing="hash"
-                  signInUrl="#"
                 />
               )}
               
