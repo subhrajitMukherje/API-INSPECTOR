@@ -25,7 +25,7 @@ A professional, modern API testing tool built with React, TypeScript, and Tailwi
 
 ## 🚀 Live Demo
 
-**[Try API Inspector Live](https://your-demo-url.com)**
+**[Try API Inspector Live](https://tiny-donut-3a1ced.netlify.app/)**
 
 *Experience the full functionality without any setup required.*
 
