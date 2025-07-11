@@ -17,15 +17,15 @@ const DashboardPage: React.FC = () => {
   }, [tabs, activeTabId, setActiveTab]);
 
   return (
-    <div className="h-screen bg-gray-100 flex flex-col">
+    <div className="h-screen bg-gray-100 flex flex-col overflow-hidden">
       <Navbar />
-      <div className="flex-1 flex min-h-0">
+      <div className="flex-1 flex min-h-0 overflow-hidden">
         <Sidebar />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0">
           <TabBar />
-          <div className="flex-1 flex min-h-0">
+          <div className="flex-1 flex flex-col lg:flex-row min-h-0">
             <RequestPanel />
-            <div className="w-1 bg-gray-200 cursor-col-resize" />
+            <div className="hidden lg:block w-1 bg-gray-200 cursor-col-resize" />
             <ResponsePanel />
           </div>
         </div>

@@ -100,25 +100,25 @@ const RequestPanel: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-white">
+    <div className="flex-1 bg-white min-w-0">
       {/* Request Name */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-3 sm:p-4 border-b border-gray-200">
         <input
           type="text"
           value={request.name}
           onChange={(e) => handleNameChange(e.target.value)}
-          className="w-full text-lg font-medium border-none outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1"
+          className="w-full text-base sm:text-lg font-medium border-none outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1"
           placeholder="Request name"
         />
       </div>
 
       {/* URL Bar */}
-      <div className="p-4 border-b border-gray-200">
-        <div className="flex space-x-2">
+      <div className="p-3 sm:p-4 border-b border-gray-200">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
           <select
             value={request.method}
             onChange={(e) => handleMethodChange(e.target.value)}
-            className={`px-3 py-2 text-white font-medium rounded-md transition-colors ${getMethodColor(request.method)}`}
+            className={`px-2 sm:px-3 py-2 text-white font-medium rounded-md transition-colors text-sm sm:text-base ${getMethodColor(request.method)}`}
           >
             <option value="GET">GET</option>
             <option value="POST">POST</option>
@@ -134,25 +134,28 @@ const RequestPanel: React.FC = () => {
             value={request.url}
             onChange={(e) => handleUrlChange(e.target.value)}
             placeholder="Enter request URL"
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
           />
           
-          <button
-            onClick={handleSendRequest}
-            disabled={!request.url.trim() || isLoading}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
-          >
-            <Send className="w-4 h-4" />
-            <span>{isLoading ? 'Sending...' : 'Send'}</span>
-          </button>
-          
-          <button
-            onClick={handleSaveRequest}
-            className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors flex items-center space-x-2"
-          >
-            <Save className="w-4 h-4" />
-            <span>Save</span>
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={handleSendRequest}
+              disabled={!request.url.trim() || isLoading}
+              className="px-3 sm:px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base"
+            >
+              <Send className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{isLoading ? 'Sending...' : 'Send'}</span>
+              <span className="sm:hidden">{isLoading ? '...' : 'Send'}</span>
+            </button>
+            
+            <button
+              onClick={handleSaveRequest}
+              className="px-3 sm:px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base"
+            >
+              <Save className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Save</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -162,52 +165,52 @@ const RequestPanel: React.FC = () => {
         <div className="border-b border-gray-200">
           <button
             onClick={() => toggleSection('headers')}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
+            className="w-full px-3 sm:px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
           >
             <div className="flex items-center space-x-2">
               {expandedSections.headers ? (
-                <ChevronDown className="w-4 h-4 text-gray-500" />
+                <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-gray-500" />
+                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
               )}
-              <span className="font-medium text-gray-900">Headers</span>
-              <span className="text-sm text-gray-500">
+              <span className="font-medium text-gray-900 text-sm sm:text-base">Headers</span>
+              <span className="text-xs sm:text-sm text-gray-500">
                 ({Object.keys(request.headers).length})
               </span>
             </div>
           </button>
           
           {expandedSections.headers && (
-            <div className="px-4 pb-4 space-y-2">
+            <div className="px-3 sm:px-4 pb-4 space-y-2">
               {Object.entries(request.headers).map(([key, value], index) => (
-                <div key={index} className="flex space-x-2">
+                <div key={index} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                   <input
                     type="text"
                     value={key}
                     onChange={(e) => handleHeaderChange(key, e.target.value, value)}
                     placeholder="Header name"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                   <input
                     type="text"
                     value={value}
                     onChange={(e) => handleHeaderChange(key, key, e.target.value)}
                     placeholder="Header value"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                   <button
                     onClick={() => handleHeaderDelete(key)}
-                    className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                    className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors self-start sm:self-auto"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               ))}
               <button
                 onClick={handleHeaderAdd}
-                className="flex items-center space-x-2 px-3 py-2 text-blue-500 hover:bg-blue-50 rounded-md transition-colors"
+                className="flex items-center space-x-2 px-3 py-2 text-blue-500 hover:bg-blue-50 rounded-md transition-colors text-sm"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span>Add Header</span>
               </button>
             </div>
@@ -218,27 +221,27 @@ const RequestPanel: React.FC = () => {
         <div className="border-b border-gray-200">
           <button
             onClick={() => toggleSection('auth')}
-            className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
+            className="w-full px-3 sm:px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
           >
             <div className="flex items-center space-x-2">
               {expandedSections.auth ? (
-                <ChevronDown className="w-4 h-4 text-gray-500" />
+                <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-gray-500" />
+                <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
               )}
-              <span className="font-medium text-gray-900">Authorization</span>
-              <span className="text-sm text-gray-500">
+              <span className="font-medium text-gray-900 text-sm sm:text-base">Authorization</span>
+              <span className="text-xs sm:text-sm text-gray-500">
                 ({request.auth?.type || 'none'})
               </span>
             </div>
           </button>
           
           {expandedSections.auth && (
-            <div className="px-4 pb-4 space-y-4">
+            <div className="px-3 sm:px-4 pb-4 space-y-4">
               <select
                 value={request.auth?.type || 'none'}
                 onChange={(e) => handleAuthChange({ type: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               >
                 <option value="none">No Auth</option>
                 <option value="bearer">Bearer Token</option>
@@ -252,7 +255,7 @@ const RequestPanel: React.FC = () => {
                   value={request.auth?.token || ''}
                   onChange={(e) => handleAuthChange({ ...request.auth, token: e.target.value })}
                   placeholder="Token"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               )}
               
@@ -263,14 +266,14 @@ const RequestPanel: React.FC = () => {
                     value={request.auth?.username || ''}
                     onChange={(e) => handleAuthChange({ ...request.auth, username: e.target.value })}
                     placeholder="Username"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                   <input
                     type="password"
                     value={request.auth?.password || ''}
                     onChange={(e) => handleAuthChange({ ...request.auth, password: e.target.value })}
                     placeholder="Password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
               )}
@@ -282,14 +285,14 @@ const RequestPanel: React.FC = () => {
                     value={request.auth?.key || ''}
                     onChange={(e) => handleAuthChange({ ...request.auth, key: e.target.value })}
                     placeholder="Key"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                   <input
                     type="text"
                     value={request.auth?.value || ''}
                     onChange={(e) => handleAuthChange({ ...request.auth, value: e.target.value })}
                     placeholder="Value"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
               )}
@@ -302,24 +305,24 @@ const RequestPanel: React.FC = () => {
           <div className="border-b border-gray-200">
             <button
               onClick={() => toggleSection('body')}
-              className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
+              className="w-full px-3 sm:px-4 py-3 flex items-center justify-between hover:bg-gray-50 transition-colors"
             >
               <div className="flex items-center space-x-2">
                 {expandedSections.body ? (
-                  <ChevronDown className="w-4 h-4 text-gray-500" />
+                  <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-gray-500" />
+                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-gray-500" />
                 )}
-                <span className="font-medium text-gray-900">Body</span>
-                <span className="text-sm text-gray-500">JSON</span>
+                <span className="font-medium text-gray-900 text-sm sm:text-base">Body</span>
+                <span className="text-xs sm:text-sm text-gray-500">JSON</span>
               </div>
             </button>
             
             {expandedSections.body && (
-              <div className="px-4 pb-4">
+              <div className="px-3 sm:px-4 pb-4">
                 <div className="border border-gray-300 rounded-md overflow-hidden">
                   <Editor
-                    height="200px"
+                    height="150px"
                     language="json"
                     value={request.body || ''}
                     onChange={(value) => handleBodyChange(value || '')}
@@ -327,7 +330,7 @@ const RequestPanel: React.FC = () => {
                     options={{
                       minimap: { enabled: false },
                       scrollBeyondLastLine: false,
-                      fontSize: 14,
+                      fontSize: 12,
                       tabSize: 2,
                       wordWrap: 'on',
                     }}
