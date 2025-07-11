@@ -11,7 +11,8 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found');
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <BrowserRouter>
@@ -20,3 +21,5 @@ createRoot(document.getElementById('root')!).render(
     </ClerkProvider>
   </StrictMode>
 );
+
+createRoot(rootElement).render(

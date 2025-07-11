@@ -58,47 +58,50 @@ const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50" role="document">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-16">
-            <div className="flex items-center space-x-3">
-              <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+            <div className="flex items-center space-x-3" role="banner">
+              <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" aria-hidden="true" />
               <span className="text-lg sm:text-xl font-bold text-gray-900">API Inspector</span>
             </div>
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <nav className="flex items-center space-x-2 sm:space-x-4" role="navigation" aria-label="Authentication">
               <button 
                 onClick={() => setShowAuth('signin')}
-                className="text-gray-700 hover:text-gray-900 px-3 py-2 sm:px-4 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
+                className="text-gray-700 hover:text-gray-900 px-3 py-2 sm:px-4 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Sign in to your account"
               >
                 Sign In
               </button>
               <button 
                 onClick={() => setShowAuth('signup')}
-                className="bg-blue-600 text-white px-4 py-2 sm:px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 text-sm sm:text-base"
+                className="bg-blue-600 text-white px-4 py-2 sm:px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-300"
+                aria-label="Get started with API Inspector"
               >
                 <span className="hidden sm:inline">Get Started</span>
                 <span className="sm:hidden">Start</span>
-                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
               </button>
-            </div>
+            </nav>
           </div>
         </div>
       </header>
 
       {/* Auth Modal */}
       {showAuth && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-6">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="auth-modal-title">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto mx-4" role="document">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                <h2 id="auth-modal-title" className="text-xl sm:text-2xl font-bold text-gray-900">
                   {showAuth === 'signin' ? 'Welcome Back' : 'Get Started'}
                 </h2>
                 <button
                   onClick={() => setShowAuth(null)}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                  className="text-gray-400 hover:text-gray-600 text-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  aria-label="Close authentication modal"
                 >
                   ×
                 </button>
@@ -155,7 +158,8 @@ const LandingPage: React.FC = () => {
               <div className="mt-4 text-center">
                 <button
                   onClick={() => setShowAuth(showAuth === 'signin' ? 'signup' : 'signin')}
-                  className="text-sm text-blue-600 hover:text-blue-700"
+                  className="text-sm text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+                  aria-label={showAuth === 'signin' ? "Switch to sign up" : "Switch to sign in"}
                 >
                   {showAuth === 'signin' 
                     ? "Don't have an account? Sign up" 
@@ -168,10 +172,10 @@ const LandingPage: React.FC = () => {
         </div>
       )}
       {/* Hero Section */}
-      <section className="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8">
+      <main className="relative py-12 sm:py-20 px-4 sm:px-6 lg:px-8" role="main">
         <div className="max-w-7xl mx-auto text-center">
           <div className="mb-8">
-            <Activity className="w-16 h-16 sm:w-20 sm:h-20 text-blue-600 mx-auto mb-4 sm:mb-6" />
+            <Activity className="w-16 h-16 sm:w-20 sm:h-20 text-blue-600 mx-auto mb-4 sm:mb-6" aria-hidden="true" />
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight px-4">
               Test APIs Like a
               <span className="text-blue-600 block">Professional</span>
@@ -185,14 +189,16 @@ const LandingPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 sm:mb-16 px-4">
             <button 
               onClick={() => setShowAuth('signup')}
-              className="bg-blue-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-blue-700 transition-all transform hover:scale-105 flex items-center space-x-3 text-base sm:text-lg font-semibold shadow-lg w-full sm:w-auto justify-center"
+              className="bg-blue-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-blue-700 transition-all transform hover:scale-105 flex items-center space-x-3 text-base sm:text-lg font-semibold shadow-lg w-full sm:w-auto justify-center focus:outline-none focus:ring-2 focus:ring-blue-300"
+              aria-label="Start testing APIs for free"
             >
               <span>Start Testing APIs</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
             </button>
             <button 
               onClick={() => setShowAuth('signin')}
-              className="border-2 border-gray-300 text-gray-700 px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all flex items-center space-x-3 text-base sm:text-lg font-semibold w-full sm:w-auto justify-center"
+              className="border-2 border-gray-300 text-gray-700 px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:border-gray-400 hover:bg-gray-50 transition-all flex items-center space-x-3 text-base sm:text-lg font-semibold w-full sm:w-auto justify-center focus:outline-none focus:ring-2 focus:ring-gray-400"
+              aria-label="Sign in to existing account"
             >
               <span>Sign In</span>
             </button>
@@ -200,12 +206,12 @@ const LandingPage: React.FC = () => {
 
           {/* Demo Preview */}
           <div className="relative max-w-5xl mx-auto">
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden mx-4 sm:mx-0">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden mx-4 sm:mx-0" role="img" aria-label="API Inspector application preview">
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:py-4 border-b border-gray-200">
                 <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full"></div>
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full"></div>
-                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-400 rounded-full" aria-hidden="true"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-400 rounded-full" aria-hidden="true"></div>
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full" aria-hidden="true"></div>
                   <span className="ml-2 sm:ml-4 text-xs sm:text-sm text-gray-600">API Inspector</span>
                 </div>
               </div>
@@ -237,7 +243,7 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </main>
 
       {/* Features Section */}
       <section className="py-12 sm:py-20 bg-white">
@@ -253,8 +259,8 @@ const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6 sm:p-8 hover:bg-gray-100 transition-colors">
-                <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-blue-600 mb-4 sm:mb-6" />
+              <div key={index} className="bg-gray-50 rounded-xl p-6 sm:p-8 hover:bg-gray-100 transition-colors" role="article">
+                <feature.icon className="w-10 h-10 sm:w-12 sm:h-12 text-blue-600 mb-4 sm:mb-6" aria-hidden="true" />
                 <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 sm:mb-4">{feature.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
@@ -274,10 +280,11 @@ const LandingPage: React.FC = () => {
           </p>
           <button 
             onClick={() => setShowAuth('signup')}
-            className="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-gray-50 transition-all transform hover:scale-105 flex items-center space-x-3 text-base sm:text-lg font-semibold mx-auto shadow-lg"
+            className="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-xl hover:bg-gray-50 transition-all transform hover:scale-105 flex items-center space-x-3 text-base sm:text-lg font-semibold mx-auto shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Get started with API Inspector for free"
           >
             <span>Get Started Free</span>
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
           </button>
         </div>
       </section>
@@ -286,7 +293,7 @@ const LandingPage: React.FC = () => {
       <footer className="bg-gray-900 text-white py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center space-x-3 mb-6 sm:mb-8">
-            <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
+            <Activity className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" aria-hidden="true" />
             <span className="text-lg sm:text-xl font-bold">API Inspector</span>
           </div>
           <div className="text-center text-gray-400 text-sm sm:text-base">

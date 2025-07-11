@@ -14,13 +14,13 @@ const ResponsePanel: React.FC = () => {
 
   if (!tab || !tab.response) {
     return (
-      <div className="flex-1 bg-gray-50 flex items-center justify-center min-w-0">
+      <section className="flex-1 bg-gray-50 flex items-center justify-center min-w-0" role="region" aria-label="API response">
         <div className="text-center text-gray-500">
-          <Database className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-gray-300" />
+          <Database className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-4 text-gray-300" aria-hidden="true" />
           <p className="text-base sm:text-lg font-medium mb-2">No Response</p>
           <p className="text-sm">Send a request to see the response here</p>
         </div>
-      </div>
+      </section>
     );
   }
 
@@ -70,21 +70,21 @@ const ResponsePanel: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 bg-white flex flex-col min-w-0">
+    <section className="flex-1 bg-white flex flex-col min-w-0" role="region" aria-label="API response">
       {/* Response Status */}
       <div className="p-3 sm:p-4 border-b border-gray-200">
         <div className="flex items-center justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(response.status)} w-fit`}>
+            <span className={`px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${getStatusColor(response.status)} w-fit`} aria-label={`Response status: ${response.status} ${response.statusText}`}>
               {response.status} {response.statusText}
             </span>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-600">
-                <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
+                <Clock className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
                 <span>{response.duration}ms</span>
               </div>
               <div className="flex items-center space-x-1 sm:space-x-2 text-xs sm:text-sm text-gray-600">
-                <Database className="w-3 h-3 sm:w-4 sm:h-4" />
+                <Database className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
                 <span>{formatSize(response.size)}</span>
               </div>
             </div>
@@ -92,17 +92,19 @@ const ResponsePanel: React.FC = () => {
           <div className="flex items-center space-x-1 sm:space-x-2">
             <button
               onClick={() => handleCopy(formatJson(response.data))}
-              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title="Copy response"
+              aria-label="Copy response to clipboard"
             >
-              <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
+              <Copy className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
             </button>
             <button
               onClick={() => handleDownload(formatJson(response.data), 'response.json')}
-              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+              className="p-1.5 sm:p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
               title="Download response"
+              aria-label="Download response as JSON file"
             >
-              <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+              <Download className="w-3 h-3 sm:w-4 sm:h-4" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -110,24 +112,30 @@ const ResponsePanel: React.FC = () => {
 
       {/* Response Tabs */}
       <div className="border-b border-gray-200">
-        <div className="flex overflow-x-auto">
+        <div className="flex overflow-x-auto" role="tablist" aria-label="Response content tabs">
           <button
             onClick={() => setActiveTab('body')}
-            className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 ${
               activeTab === 'body'
                 ? 'text-blue-600 border-b-2 border-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
+            role="tab"
+            aria-selected={activeTab === 'body'}
+            aria-controls="body-panel"
           >
             Body
           </button>
           <button
             onClick={() => setActiveTab('headers')}
-            className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-colors whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-blue-500 ${
               activeTab === 'headers'
                 ? 'text-blue-600 border-b-2 border-blue-600'
                 : 'text-gray-600 hover:text-gray-900'
             }`}
+            role="tab"
+            aria-selected={activeTab === 'headers'}
+            aria-controls="headers-panel"
           >
             Headers ({Object.keys(response.headers).length})
           </button>
@@ -137,7 +145,7 @@ const ResponsePanel: React.FC = () => {
       {/* Response Content */}
       <div className="flex-1 overflow-hidden">
         {activeTab === 'body' && (
-          <div className="h-full">
+          <div className="h-full" role="tabpanel" id="body-panel" aria-label="Response body">
             <Editor
               height="100%"
               language="json"
@@ -149,6 +157,7 @@ const ResponsePanel: React.FC = () => {
                 fontSize: 12,
                 tabSize: 2,
                 wordWrap: 'on',
+                ariaLabel: 'Response body JSON viewer',
               }}
               theme="vs-light"
             />
@@ -156,7 +165,7 @@ const ResponsePanel: React.FC = () => {
         )}
         
         {activeTab === 'headers' && (
-          <div className="p-3 sm:p-4 space-y-2 overflow-y-auto">
+          <div className="p-3 sm:p-4 space-y-2 overflow-y-auto" role="tabpanel" id="headers-panel" aria-label="Response headers">
             {Object.entries(response.headers).map(([key, value]) => (
               <div key={key} className="flex flex-col sm:flex-row sm:items-start space-y-1 sm:space-y-0 sm:space-x-4 p-2 sm:p-3 bg-gray-50 rounded-lg">
                 <span className="font-medium text-gray-900 min-w-0 flex-shrink-0 text-sm">
@@ -168,7 +177,7 @@ const ResponsePanel: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
