@@ -18,10 +18,16 @@ createRoot(rootElement).render(
   <StrictMode>
     <ClerkProvider 
       publishableKey={PUBLISHABLE_KEY}
-      afterSignInUrl="https://tiny-donut-3a1ced.netlify.app/dashboard"
-      afterSignUpUrl="https://tiny-donut-3a1ced.netlify.app/dashboard"
-      signInUrl="https://tiny-donut-3a1ced.netlify.app/"
-      signUpUrl="https://tiny-donut-3a1ced.netlify.app/"
+      afterSignInUrl="/dashboard"
+      afterSignUpUrl="/dashboard"
+      signInUrl="/"
+      signUpUrl="/"
+      appearance={{
+        baseTheme: undefined,
+        variables: {
+          colorPrimary: '#2563eb'
+        }
+      }}
     >
       <BrowserRouter>
         <App />
