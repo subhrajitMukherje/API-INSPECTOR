@@ -18,7 +18,10 @@ createRoot(rootElement).render(
   <StrictMode>
     <ClerkProvider 
       publishableKey={PUBLISHABLE_KEY}
-      navigate={(to) => window.location.href = to}
+      afterSignInUrl="/dashboard"
+      afterSignUpUrl="/dashboard"
+      signInUrl="/"
+      signUpUrl="/"
     >
       <BrowserRouter>
         <App />
