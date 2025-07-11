@@ -115,13 +115,13 @@ const LandingPage: React.FC = () => {
                       form: "w-full",
                       headerTitle: "hidden",
                       headerSubtitle: "hidden",
-                      socialButtonsBlockButton: "border border-gray-300 hover:bg-gray-50",
+                      socialButtonsBlock: "hidden",
+                      socialButtonsBlockButton: "hidden",
                       formButtonPrimary: "bg-blue-600 hover:bg-blue-700",
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
                   }}
                   routing="hash"
-                  socialButtonsVariant="iconButton"
                   signUpUrl="#"
                 />
               ) : (
@@ -135,13 +135,13 @@ const LandingPage: React.FC = () => {
                       form: "w-full",
                       headerTitle: "hidden",
                       headerSubtitle: "hidden",
-                      socialButtonsBlockButton: "border border-gray-300 hover:bg-gray-50",
+                      socialButtonsBlock: "hidden",
+                      socialButtonsBlockButton: "hidden",
                       formButtonPrimary: "bg-blue-600 hover:bg-blue-700",
                       footerActionLink: "text-blue-600 hover:text-blue-700"
                     }
                   }}
                   routing="hash"
-                  socialButtonsVariant="iconButton"
                   signInUrl="#"
                 />
               )}
